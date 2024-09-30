@@ -1,19 +1,29 @@
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.selector.ByText;
+import com.codeborne.selenide.Configuration;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CardDeliveryTest {
+
+    @BeforeAll
+    public static void setUp() {
+        WebDriverManager.chromedriver().setup(); // Автоматически подбирает нужную версию ChromeDriver
+        Configuration.browser = "chrome";
+        Configuration.headless = true; // Запуск в headless режиме
+    }
+
     @Test
     void shouldTestFormPositive() {
         open("http://localhost:9999/");
